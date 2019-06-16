@@ -55,10 +55,12 @@ export default {
       },
     },
   },
-  data: () => ({
-    header: '',
-    text: '',
-  }),
+  data() {
+    return {
+      header: '',
+      text: '',
+    };
+  },
   beforeMount() {
     const todos = this.$api.get() || [];
     const currentTodo = todos.find(todo => todo.id === +this.id);

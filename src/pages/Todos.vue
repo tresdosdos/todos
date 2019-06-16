@@ -25,9 +25,11 @@ export default {
   components: {
     't-todo': Todo,
   },
-  data: () => ({
-    todos: [],
-  }),
+  data() {
+    return {
+      todos: [],
+    };
+  },
   beforeMount() {
     this.todos = this.$api.get();
   },

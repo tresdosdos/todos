@@ -2,13 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-        >
+        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
           <q-icon name="menu" />
         </q-btn>
 
@@ -25,24 +19,7 @@
     >
       <q-list>
         <q-item-label header>Navigation</q-item-label>
-        <q-item clickable tag="router-link" to="/" exact>
-          <q-item-section avatar>
-            <q-icon name="list" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Home</q-item-label>
-            <q-item-label caption>Manage your todos</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="router-link" to="/todo" exact>
-          <q-item-section avatar>
-            <q-icon name="add" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>New todo</q-item-label>
-            <q-item-label caption>Add your todo</q-item-label>
-          </q-item-section>
-        </q-item>
+        <t-drawer-item v-for="link of links" :link="link" :key="link.header"></t-drawer-item>
       </q-list>
     </q-drawer>
 
@@ -53,11 +30,30 @@
 </template>
 
 <script>
+import DrawerLink from 'components/DrawerItem';
+
 export default {
   name: 'HomeLayout',
+  components: {
+    't-drawer-item': DrawerLink,
+  },
   data() {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
+      links: [
+        {
+          path: '/',
+          icon: 'add',
+          header: 'New todo',
+          text: 'Manage your todos',
+        },
+        {
+          path: '/todo',
+          icon: 'list',
+          header: 'Home',
+          text: 'Add your todo',
+        },
+      ],
     };
   },
   computed: {
